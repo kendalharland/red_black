@@ -1,0 +1,9 @@
+name: red_black_tree
+version: 1.0.0
+authors: 
+- Kendal Harland <kendaljharland@gmail.com>
+description: A Linked List backed by a Red-Black Tree
+homepage: "https://github.com/kharland/dart-red-black-tree.git"
+dev_dependencies:
+  test: any
+  collection: '>= 1.1.3'
