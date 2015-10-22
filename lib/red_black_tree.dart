@@ -11,7 +11,7 @@ enum Color { RED, BLACK }
 /// - Returns 0 when lhs and rhs are ordered equally.
 typedef int Comparator(T lhs, T rhs);
 
-/// A pair of two RedBlackNodes. Used as the result of read/write operations on 
+/// A pair of [RedBlackNode]s. Used as the result of read/write operations on a
 /// [RedBlackTree].
 class NodePair<T> {
   final RedBlackNode<T> first;
@@ -83,9 +83,8 @@ abstract class RedBlackTree<T> {
   /// Returns a NodePair representing a location for [value] to be inserted into
   /// the tree as a leaf. 
   /// 
-  /// The node property will be null and the parent property
-  /// will contain the would-be parent of [value]'s node if it were inserted
-  /// into the tree.
+  /// NodePair.first will contain the would-be parent of [value]'s node if it 
+  /// were inserted into the tree. NodePair.second will be null.
   NodePair<T> findInsertionPoint(T value);
 
   /// Inserts [node] into the tree as a leaf.
@@ -95,15 +94,12 @@ abstract class RedBlackTree<T> {
   /// is greater than or equal to its value.
   NodePair<T> insert(RedBlackNode<T> node);
 
-  /// Inserts [node] after [after].  If [after] is null, [node] will become the
-  /// new head of the list. If [after] is [tail], [node] will become the new
-  /// tail of the list.
+  /// Inserts [node] after [after] and returns a [NodePair] where first = the
+  /// parent of [node] and second = [node].  
   /// 
-  /// Returns a [NodePair] whose first getter is the parent of [node] and whose
-  /// second getter is [node].
-  /// 
-  /// If [after] is null then [node] is inserted at the root of the tree.
-  /// 
+  /// If [after] is null or [head] then [node] will become the new head of the 
+  /// list. If [after] is [tail], [node] will become the new tail of the list.
+  ///
   /// It is recommeneded to use [insert] as this function allows you to violate
   /// the sorted order of the linked-list.
   NodePair<T> insertAfter(RedBlackNode<T> after, RedBlackNode<T> node);
