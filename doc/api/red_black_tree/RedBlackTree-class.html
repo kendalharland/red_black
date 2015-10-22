@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RedBlackTree class - red_black_tree library - Dart API</title>
+    <!-- required because all the links are pseudo-absolute -->
+    <base href="..">
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro|Roboto:500,400italic,300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="static-assets/prettify.css">
+    <link rel="stylesheet" href="static-assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static-assets/styles.css">
+
+    <meta name="description" content="API docs for the RedBlackTree class from the red_black_tree library, for the Dart programming language.">
+    <link rel="icon" href="static-assets/favicon.png">
+
+    <!-- Do not remove placeholder -->
+    <!-- Header Placeholder -->
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header class="container-fluid" id="title">
+    <nav class="navbar navbar-fixed-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 contents">
+              <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+              <ol class="breadcrumbs gt-separated hidden-xs">
+                  <li><a href="index.html">red_black_tree</a></li>
+                  <li><a href="red_black_tree/red_black_tree-library.html">red_black_tree</a></li>
+                  <li class="self-crumb">RedBlackTree</li>
+              </ol>
+              <div class="self-name">RedBlackTree</div>
+              <form class="search navbar-right" role="search">
+                <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+              </form>
+            </div> <!-- /col -->
+          </div> <!-- /row -->
+        </div> <!-- /container -->
+    </nav>
+
+    <div class="container masthead">
+      <div class="row">
+        <div class="col-sm-12 contents">
+          <ol class="breadcrumbs gt-separated visible-xs">
+              <li><a href="index.html">red_black_tree</a></li>
+              <li><a href="red_black_tree/red_black_tree-library.html">red_black_tree</a></li>
+              <li class="self-crumb">RedBlackTree</li>
+          </ol>
+          <div class="title-description">
+              <h1 class="title">
+                  <div class="kind">abstract class</div> RedBlackTree&ltT&gt
+              </h1>
+          </div>
+          <ul class="subnav">
+              <li><a href="red_black_tree/RedBlackTree-class.html#static-properties">Static Properties</a></li>
+              <li><a href="red_black_tree/RedBlackTree-class.html#instance-properties">Properties</a></li>
+              <li><a href="red_black_tree/RedBlackTree-class.html#constructors">Constructors</a></li>
+              <li><a href="red_black_tree/RedBlackTree-class.html#operators">Operators</a></li>
+              <li><a href="red_black_tree/RedBlackTree-class.html#instance-methods">Methods</a></li>
+          </ul>
+        </div> <!-- /col -->
+      </div> <!-- /row -->
+    </div> <!-- /container -->
+
+</header>
+
+<div class="container body">
+  <div class="row">
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5><a href="index.html">red_black_tree</a></h5>
+    <h5><a href="red_black_tree/red_black_tree-library.html">red_black_tree</a></h5>
+
+    <ol>
+    
+      <li class="section-title"><a href="red_black_tree/red_black_tree-library.html#typedefs">Typedefs</a></li>
+      <li><a class="" href="red_black_tree/Comparator.html">Comparator</a></li>
+    
+    
+    
+      <li class="section-title"><a href="red_black_tree/red_black_tree-library.html#enums">Enums</a></li>
+      <li><a class="" href="red_black_tree/Color-class.html">Color</a></li>
+    
+      <li class="section-title"><a href="red_black_tree/red_black_tree-library.html#classes">Classes</a></li>
+      <li><a class="" href="red_black_tree/NodePair-class.html">NodePair</a></li>
+      <li><a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree-class.html">RedBlackTree</a></li>
+    
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+
+    <section class="desc markdown">
+    
+          <p>A Linked-List Red-Black tree implementation.  </p>
+<p>Insert and delete operations automatically update an item's position in the 
+linked list, resetting next and prev pointers accordingly. When ordering 
+items in the tree, the item's &lt; &gt; and == operators are used.</p>
+<p>Because this is a red-black tree, it is not guaranteed to be completely 
+balanced after write operations.</p>
+    
+    </section>
+
+
+
+    <section class="summary offset-anchor" id="static-properties">
+        <h2>Static Properties</h2>
+
+        <dl class="properties">
+            <dt id="NULL" class="property">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/NULL.html">NULL</a></span>
+                <span class="signature">&#8594; dynamic</span>
+            </dt>
+            <dd>
+                <p></p>
+                <div class="features">
+        read-only
+    </div>
+</dd>
+        </dl>
+    </section>
+
+
+    <section class="summary offset-anchor" id="instance-properties">
+        <h2>Properties</h2>
+
+        <dl class="properties">
+            <dt id="hashCode" class="property">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/hashCode.html">hashCode</a></span>
+                <span class="signature">&#8594; int</span>
+            </dt>
+            <dd>
+                <p>Get a hash code for this object.<a href="red_black_tree/RedBlackTree/hashCode.html">&hellip;</a>
+</p>
+                <div class="features">
+        read-only, inherited
+    </div>
+</dd>
+            <dt id="head" class="property">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/head.html">head</a></span>
+                <span class="signature">&#8594; <a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span>
+            </dt>
+            <dd>
+                <p>Returns the head of the linked list.<a href="red_black_tree/RedBlackTree/head.html">&hellip;</a>
+</p>
+                <div class="features">
+        read-only
+    </div>
+</dd>
+            <dt id="root" class="property">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/root.html">root</a></span>
+                <span class="signature">&#8594; <a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span>
+            </dt>
+            <dd>
+                <p>Returns the root node in the tree.</p>
+                <div class="features">
+        read-only
+    </div>
+</dd>
+            <dt id="runtimeType" class="property">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/runtimeType.html">runtimeType</a></span>
+                <span class="signature">&#8594; Type</span>
+            </dt>
+            <dd>
+                <p>A representation of the runtime type of the object.</p>
+                <div class="features">
+        read-only, inherited
+    </div>
+</dd>
+            <dt id="tail" class="property">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/tail.html">tail</a></span>
+                <span class="signature">&#8594; <a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span>
+            </dt>
+            <dd>
+                <p>Returns the tail of the linked list.  <a href="red_black_tree/RedBlackTree/tail.html">&hellip;</a>
+</p>
+                <div class="features">
+        read-only
+    </div>
+</dd>
+        </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+        <h2>Constructors</h2>
+
+        <dl class="constructor-summary-list">
+            <dt id="RedBlackTree" class="callable">
+                <span class="name"><a class="" href="red_black_tree/RedBlackTree/RedBlackTree.html">RedBlackTree</a></span><span class="signature">([<span class="parameter" id="-param-comparator"><span class="type-annotation">int</span> <span class="parameter-name">comparator</span>(<span class="parameter" id="Comparator-param-lhs"><span class="parameter-name">lhs</span></span>, <span class="parameter" id="Comparator-param-rhs"><span class="parameter-name">rhs</span></span>)</span>])</span>
+            </dt>
+            <dd>
+                <p>Factory constructor to return an instance of the default implementation</p>
+                <div class="constructor-modifier features">factory</div>
+            </dd>
+        </dl>
+      </section>
+
+      <section class="summary offset-anchor" id="operators">
+          <h2>Operators</h2>
+          <dl class="callables">
+              <dt id="operator ==" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="parameter-name">other</span></span>)
+                      <span class="returntype parameter">&#8594; bool</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>The equality operator.<a href="red_black_tree/RedBlackTree/operator_equals.html">&hellip;</a>
+</p>
+                  <div class="features">inherited</div>
+              </dd>
+          </dl>
+      </section>
+
+      <section class="summary offset-anchor" id="instance-methods">
+          <h2>Methods</h2>
+          <dl class="callables">
+              <dt id="clone" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/clone.html">clone</a></span><span class="signature">(<wbr><span class="parameter" id="clone-param-other"><span class="type-annotation"><a class="" href="red_black_tree/RedBlackTree-class.html">RedBlackTree</a>&lt;T&gt;</span> <span class="parameter-name">other</span></span>)
+                      <span class="returntype parameter">&#8594; <a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>TODO(kjharland): implement<a href="red_black_tree/RedBlackTree/clone.html">&hellip;</a>
+</p>
+              </dd>
+              <dt id="find" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/find.html">find</a></span><span class="signature">(<wbr><span class="parameter" id="find-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+                      <span class="returntype parameter">&#8594; <a class="" href="red_black_tree/NodePair-class.html">NodePair</a>&lt;T&gt;</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>Finds and returns the node containing <code>value</code> if it exists. Otherwise
+returns null.</p>
+              </dd>
+              <dt id="findInsertionPoint" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/findInsertionPoint.html">findInsertionPoint</a></span><span class="signature">(<wbr><span class="parameter" id="findInsertionPoint-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+                      <span class="returntype parameter">&#8594; <a class="" href="red_black_tree/NodePair-class.html">NodePair</a>&lt;T&gt;</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>Returns a NodePair representing a location for <code>value</code> to be inserted into
+the tree as a leaf. <a href="red_black_tree/RedBlackTree/findInsertionPoint.html">&hellip;</a>
+</p>
+              </dd>
+              <dt id="insert" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/insert.html">insert</a></span><span class="signature">(<wbr><span class="parameter" id="insert-param-node"><span class="type-annotation"><a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span> <span class="parameter-name">node</span></span>)
+                      <span class="returntype parameter">&#8594; <a class="" href="red_black_tree/NodePair-class.html">NodePair</a>&lt;T&gt;</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>Inserts <code>node</code> into the tree as a leaf.<a href="red_black_tree/RedBlackTree/insert.html">&hellip;</a>
+</p>
+              </dd>
+              <dt id="insertAfter" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/insertAfter.html">insertAfter</a></span><span class="signature">(<wbr><span class="parameter" id="insertAfter-param-after"><span class="type-annotation"><a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span> <span class="parameter-name">after</span></span>, <span class="parameter" id="insertAfter-param-node"><span class="type-annotation"><a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span> <span class="parameter-name">node</span></span>)
+                      <span class="returntype parameter">&#8594; <a class="" href="red_black_tree/NodePair-class.html">NodePair</a>&lt;T&gt;</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>Inserts <code>node</code> after <code>after</code> and returns a <a class="" href="red_black_tree/NodePair-class.html">NodePair</a> where first = the
+parent of <code>node</code> and second = <code>node</code>.  <a href="red_black_tree/RedBlackTree/insertAfter.html">&hellip;</a>
+</p>
+              </dd>
+              <dt id="noSuchMethod" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+                      <span class="returntype parameter">&#8594; dynamic</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p><code>noSuchMethod</code> is invoked when users invoke a non-existent method
+on an object. The name of the method and the arguments of the
+invocation are passed to <code>noSuchMethod</code> in an <code>Invocation</code>.
+If <code>noSuchMethod</code> returns a value, that value becomes the result of
+the original invocation.<a href="red_black_tree/RedBlackTree/noSuchMethod.html">&hellip;</a>
+</p>
+                  <div class="features">inherited</div>
+              </dd>
+              <dt id="remove" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/remove.html">remove</a></span><span class="signature">(<wbr><span class="parameter" id="remove-param-node"><span class="type-annotation"><a class="" href="red_black_tree/RedBlackNode-class.html">RedBlackNode</a>&lt;T&gt;</span> <span class="parameter-name">node</span></span>)
+                      <span class="returntype parameter">&#8594; <a class="" href="red_black_tree/NodePair-class.html">NodePair</a>&lt;T&gt;</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>Removes <code>node</code> from the tree and returns a NodePair. <a href="red_black_tree/RedBlackTree/remove.html">&hellip;</a>
+</p>
+              </dd>
+              <dt id="toString" class="callable">
+                  <span class="name "><a class="" href="red_black_tree/RedBlackTree/toString.html">toString</a></span><span class="signature">(<wbr>)
+                      <span class="returntype parameter">&#8594; String</span>
+                  </span>
+              </dt>
+              <dd>
+                  <p>Returns a string representation of this object.</p>
+                  <div class="features">inherited</div>
+              </dd>
+          </dl>
+      </section>
+
+    </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <h5>RedBlackTree</h5>
+    <ol>
+    
+      <li class="section-title"><a href="red_black_tree/RedBlackTree-class.html#static-properties">Static properties</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/NULL.html">NULL</a></li>
+    
+    
+      <li class="section-title"><a href="red_black_tree/RedBlackTree-class.html#instance-properties">Properties</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/hashCode.html">hashCode</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/head.html">head</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/root.html">root</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/runtimeType.html">runtimeType</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/tail.html">tail</a></li>
+    
+      <li class="section-title"><a href="red_black_tree/RedBlackTree-class.html#constructors">Constructors</a></li>
+      <li><a href="red_black_tree/RedBlackTree/RedBlackTree.html">RedBlackTree</a></li>
+    
+      <li class="section-title"><a href="red_black_tree/RedBlackTree-class.html#operators">Operators</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/operator_equals.html">operator ==</a></li>
+    
+      <li class="section-title"><a href="red_black_tree/RedBlackTree-class.html#instance-methods">Methods</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/clone.html">clone</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/find.html">find</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/findInsertionPoint.html">findInsertionPoint</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/insert.html">insert</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/insertAfter.html">insertAfter</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/noSuchMethod.html">noSuchMethod</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/remove.html">remove</a></li>
+      <li><a class="" href="red_black_tree/RedBlackTree/toString.html">toString</a></li>
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  </div> <!-- row -->
+</div> <!-- container -->
+
+<footer>
+    <div class="container-fluid">
+        <div class="container">
+            <p class="text-center">
+                <span class="no-break">
+                  red_black_tree 0.1.0
+                </span>
+                &bull;
+                <span class="no-break">
+                  <a href="https://www.dartlang.org">
+                    <img src="static-assets/favicon.png" alt="Dart" title="Dart" width="16" height="16">
+                  </a>
+                </span>
+                &bull;
+                <span class="copyright no-break">
+                  <a href="http://creativecommons.org/licenses/by-sa/4.0/">cc license</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/prettify.js"></script>
+<script src="static-assets/script.js"></script>
+<!-- Do not remove placeholder -->
+<!-- Footer Placeholder -->
+
+<!-- Made with <3 by dartdoc version 0.7.2 -->
+</body>
+
+</html>
