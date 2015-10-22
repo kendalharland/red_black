@@ -1,83 +1,99 @@
-library segment_intersection.red_black_tree;
+part of red_black_tree;
 
-enum Color { RED, BLACK }
 
-/// A Red Black Tree Node.
-class RedBlackNode<T> {
-  Color color;
-  RedBlackNode<T> next;
-  RedBlackNode<T> prev;
-  RedBlackNode<T> parent;
-  RedBlackNode<T> left;
-  RedBlackNode<T> right;
-  T value;
+/// RedBlackTree default implementation.
+class _RedBlackTreeImpl<T> implements RedBlackTree {
+  /// Default comparator for instances of T.
+  static final _DEFAULT_COMPARATOR = (T lhs, T rhs) {
+    if (lhs < rhs) return -1;
+    if (lhs > rhs) return 1;
+    if (lhs == rhs) return 0;
+  };
 
-  RedBlackNode(this.value) 
-    : color = Color.RED,
-      next = null,
-      prev = null,
-      parent = null,
-      left = null,
-      right = null {}
-}
-
-/// A Linked-List Red-Black tree implementation.  
-/// 
-/// Insert and delete operations automatically update an item's position in the 
-/// linked list. When ordering items in the tree, the item's < > and == 
-/// operators are used instead of a comparator function.
-/// 
-/// Because this is a red-black tree, it is not guaranteed to be completely 
-/// balanced after write operations.
-class RedBlackTree<T> {
-  /// Sentinel value used to represent null nodes
-  static final NULL = new RedBlackNode(null)..color = Color.BLACK;
-
-  RedBlackNode<T> _root = NULL;
+  Comparator _comparator;
+  RedBlackNode<T> _root = RedBlackTree.NULL;
   RedBlackNode<T> _head;
   RedBlackNode<T> _tail;
 
-  /// Get the root node in the tree.
+  _RedBlackTreeImpl(this._comparator) { 
+    _comparator ??= _DEFAULT_COMPARATOR;
+  }
+
   RedBlackNode<T> get root => _root;
-
-  /// Get the head of the linked list.
   RedBlackNode<T> get head => _head;
-
-  /// Get the tail of the linked list.
   RedBlackNode<T> get tail => _tail;
 
-  /// Inserts [node] into the tree after [after], updating list positions 
-  /// accordingly. 
-  /// 
-  /// If after is null, [node] will be inserted at the head of the linked-list.
-  /// If [after] is [tail], [node] becomes the new tail. 
-  void insertAfter(RedBlackNode<T> after, RedBlackNode<T> node) {
+  
+  RedBlackTree<T> copy(RedBlackTree<T> other);
+
+
+  NodePair<T> find(T value) {
+    RedBlackNode<T> node = root;
+    RedBlackNode<T> parent = node;
+
+    //TODO(kharland): This could probably simpler
+    while (node != RedBlackTree.NULL) {
+      parent = node;
+      int result = _comparator(value, node.value);
+      if (result < 0) {
+        node = node.left;
+      } else if (result > 0) {
+        node = node.right;
+      } else if (result == 0) {
+        return new NodePair<T>(node.parent, node);
+      }
+    }
+
+    return new NodePair<T>(parent, null);
+  }
+
+
+  NodePair<T> findInsertionPoint(T value) {
+    RedBlackNode<T> node = root;
+    RedBlackNode<T> parent = root;
+
+    while (node != RedBlackTree.NULL) {
+      parent = node;
+      int result = _comparator(value, node.value);
+      if (result < 0) {
+        node = node.left;
+      } else {
+        node = node.right;
+      }
+    }
+
+    return new NodePair<T>(parent, null); 
+  }
+
+
+  NodePair<T> insertAfter(RedBlackNode<T> after, RedBlackNode<T> node) {
     RedBlackNode<T> before;
 
     node.left = 
     node.right = 
-    node.parent = NULL;
+    node.parent = RedBlackTree.NULL;
 
     node.next = 
     node.prev = null;
-
-    /// There is no root node, set this new node as root, head and tail and 
-    /// color it black.
-    if (_root == NULL) {
+    
+    if (_root == RedBlackTree.NULL) {
       _root = node;
       _head = _tail = _root;
       _root.color = Color.BLACK;
-      return;
+      return new NodePair<T>(null, _root);
     }
 
-    /// If this node preceeds every node in the list, set it as head.
-    /// 
-    /// If [before] is null then [after] must be tail and as such cannot have
-    /// any nodes in its right subtree. So we set [node] as the new tail as 
-    /// [after]'s right child.
-    /// 
-    /// If [before] is not null but as no left child,we hOtherwise insert [node] between [after] and [before] resetting 
-    /// parent pointers where necessary.
+    // If before is null then [after] must be tail and as such cannot have
+    // any nodes in its right subtree and cannot be a left child. So we set 
+    // [node] as the new tail as [after]'s right child.
+    // 
+    // If before is not null but as no left child, we insert [node] as before's
+    // left child.
+    // 
+    // If before is not null and has a left child, then after does not have a
+    // right child (if after did have right child, before would be the leftmost
+    // node in after's right subtree and would have no left child) so we set 
+    // node as after's right child.
     if (after == null) {
       before = _head;
       node.next = before;
@@ -89,16 +105,19 @@ class RedBlackTree<T> {
       after.next = node;
       node.next = before;
       node.prev = after;
-      if (before == null) { // after is tail
-        assert(after.right == NULL);
+      if (before == null) { 
+        // after is tail
+        assert(after.right == RedBlackTree.NULL);
         after.right = node;
         node.parent = after;
-      } else if (before.left == NULL) {  // before is in after's right subtree
+      } else if (before.left == RedBlackTree.NULL) {  
+        // before is in after's right subtree
         before.left = node;
         node.parent = before;
         before.prev = node;
-      } else { // after is in before's left subtree
-        assert(after.right == NULL);
+      } else { 
+        // after is in before's left subtree
+        assert(after.right == RedBlackTree.NULL);
         after.right = node;
         node.parent = after;
         before.prev = node;
@@ -107,24 +126,21 @@ class RedBlackTree<T> {
     
     if (node.prev == null) _head = node;
     if (node.next == null) _tail = node;
+
     node.color = Color.RED;
     _fixupAfterInsertion(node);
+    return new NodePair<T>(node.parent, node);
   }
 
-  /// Inserts [item] into the tree.
-  void insert(RedBlackNode<T> newNode) {
-    var node = _root,
-        parent = NULL;
 
-    while (node != NULL) {
-      parent = node;
-      node = newNode.value < node.value
-          ? node.left
-          : node.right;
-    }
-
+  NodePair<T> insert(RedBlackNode<T> newNode) {
+    NodePair<T> searchResult = findInsertionPoint(newNode.value);
+    RedBlackNode<T> parent = searchResult.first;
+    
+    assert(searchResult.second == null);
     newNode.parent = parent;
-    if (parent == NULL) {
+
+    if (parent == RedBlackTree.NULL) {
       _root = newNode;
       _head = _tail = _root;
     } else if (newNode.value < parent.value) {
@@ -149,13 +165,14 @@ class RedBlackTree<T> {
       newNode.prev = parent;
     }
 
-    newNode.left = newNode.right = NULL;
+    newNode.left = newNode.right = RedBlackTree.NULL;
     newNode.color = Color.RED;
     _fixupAfterInsertion(newNode);
+    return new NodePair<T>(newNode.parent, newNode);
   }
 
-  /// Removes the subtree rooted at [node]
-  void delete(RedBlackNode<T> node) {
+
+  void remove(RedBlackNode<T> node) {
     RedBlackNode<T> child;
     RedBlackNode<T> after = node;
     Color originalColor = after.color;
@@ -172,10 +189,10 @@ class RedBlackTree<T> {
       node.next.prev = node.prev;
     }
 
-    if (node.left == NULL) {
+    if (node.left == RedBlackTree.NULL) {
       child = node.right;
       _transplant(node, child);
-    } else if (node.right == NULL) {
+    } else if (node.right == RedBlackTree.NULL) {
       child = node.left;
       _transplant(node, child);
     } else {
@@ -202,11 +219,12 @@ class RedBlackTree<T> {
     node.next = null;
 
     if (originalColor == Color.BLACK) {
-      _fixupAfterDelete(child);
+      _fixupAfterRemove(child);
     }
   }
 
-  // Fix any violations of the red-black properties caused by node after an insertion
+  // Fix any violations of the red-black properties caused by node after an 
+  // insertion.
   void _fixupAfterInsertion(RedBlackNode<T> node) {
     var parent = node.parent,
         grandparent,
@@ -257,7 +275,7 @@ class RedBlackTree<T> {
   }
 
   // Fixes up a node that may violate red-black properties after a deletion
-  void _fixupAfterDelete(RedBlackNode<T> node) {
+  void _fixupAfterRemove(RedBlackNode<T> node) {
     var parent,
         uncle;
 
@@ -324,11 +342,11 @@ class RedBlackTree<T> {
     var child = node.right;
     
     node.right = child.left; 
-    if (child.left != NULL) {
+    if (child.left != RedBlackTree.NULL) {
       child.left.parent = node; 
     }
     child.parent = node.parent;
-    if (node.parent == NULL) {
+    if (node.parent == RedBlackTree.NULL) {
       _root = child;
     } else if (node == node.parent.left) {
       node.parent.left = child;
@@ -345,12 +363,12 @@ class RedBlackTree<T> {
     var child = node.left;
 
     node.left = child.right;
-    if (child.right != NULL) {
+    if (child.right != RedBlackTree.NULL) {
       child.right.parent = node;
     }
     child.parent = node.parent;
 
-    if (node.parent == NULL) {
+    if (node.parent == RedBlackTree.NULL) {
       _root = child;
     } else if (node == node.parent.left) {
       node.parent.left = child;
@@ -362,10 +380,10 @@ class RedBlackTree<T> {
     node.parent = child;
   }
 
-  // replaces the RedBlackTree rooted at existing with the RedBlackTree rooted 
+  // replaces the _RedBlackTreeImpl rooted at existing with the _RedBlackTreeImpl rooted 
   // at replacement.
   void _transplant(RedBlackNode<T> existing, RedBlackNode<T> replacement) {
-    if (existing.parent == NULL) {
+    if (existing.parent == RedBlackTree.NULL) {
       _root = replacement;
     } else if (existing == existing.parent.left) {
       existing.parent.left = replacement;
