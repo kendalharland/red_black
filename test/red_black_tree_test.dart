@@ -1,5 +1,7 @@
 library red_black_tree_test;
 
+/// !!! Tests are incomplete, use at your own risk !!!
+
 import 'dart:math' show Random, max;
 import 'package:test/test.dart';
 import 'package:red_black_tree/red_black_tree.dart';
@@ -15,14 +17,6 @@ void redBlackTreeTest() {
   final random = new Random();
   List<RedBlackNode<int>> nodes;
 
-  // TODO(kharland): Does this really verify all of the properties of a 
-  // Red-Black tree's structure and color pattern?
-  void verifyRedBlackPropertiesHold() {
-    expect(redBlackTree.root.parent, equals(RedBlackTree.NULL));
-    expect(redBlackTree.root.color, equals(Color.BLACK));
-    verifyNodeColors();
-  }
-
   void verifyNodeColors() {
     RedBlackNode<int> node = redBlackTree.head;
     while (node != null) {
@@ -31,6 +25,14 @@ void redBlackTreeTest() {
       }
       node = node.next;
     }
+  }
+
+  // TODO(kharland): Does this really verify all of the properties of a 
+  // Red-Black tree's structure and color pattern?
+  void verifyRedBlackPropertiesHold() {
+    expect(redBlackTree.root.parent, equals(RedBlackTree.NULL));
+    expect(redBlackTree.root.color, equals(Color.BLACK));
+    verifyNodeColors();
   }
 
   group("RedBlackTree", () {
@@ -44,9 +46,9 @@ void redBlackTreeTest() {
     });
 
     test(
-        "find should return a NodePair where first -> the parent of the node "
-        "containing the value, if the node exists and second -> the node itself"
-        , () {
+        "find should return a NodePair where first = the parent of the node "
+        "containing the search key and second = the node itself, if the node "
+        "exists", () {
       RedBlackNode<int> node;
       NodePair<int> pair;
       int value;
@@ -73,12 +75,12 @@ void redBlackTreeTest() {
     });
 
     test(
-        "find insertion point should return NodePair where first = a node with"
+        "findInsertionPoint should return a NodePair where first = a node with "
         "at most one child and second = null", () {
       int item;
       nodes.forEach(redBlackTree.insert);
 
-      for (int i=0; i < ITEM_COUNT/3; i++) {
+      for (int i=0; i < ITEM_COUNT/2; i++) {
         item = nodes[random.nextInt(nodes.length)].value;
         NodePair<int> pair = redBlackTree.findInsertionPoint(item);
         if (pair.first.left != RedBlackTree.NULL) {
@@ -99,12 +101,40 @@ void redBlackTreeTest() {
       }
     });
 
+    test(
+      "remove should return a NodePair where first = the removed node and "
+      "second = null if the node is in the tree.", () {
+        NodePair<int> pair;
+        RedBlackNode<int> node;
+
+        nodes.forEach(redBlackTree.insert);
+        for (int i=0; i < ITEM_COUNT/2; i++) {
+          node = nodes.removeAt(random.nextInt(nodes.length));
+          pair = redBlackTree.remove(node);
+          expect(pair.first, equals(node));
+          expect(pair.second, isNull);
+        }
+    });
+
+    test(
+      "remove should return a NodePair where first and second = null if the "
+      "node is not in the tree.", () {
+        NodePair<int> pair;
+        RedBlackNode<int> node;
+
+        nodes.forEach(redBlackTree.insert);
+        node = new RedBlackNode<int>(MAX_VALUE + 1);
+        pair = redBlackTree.remove(node);
+        expect(pair.first, isNull);
+        expect(pair.second, isNull);
+    });
+
     test("remove should preserve ascending order of linked-list pointers", () {
       RedBlackNode<int> node;
       int item;
 
       nodes.forEach(redBlackTree.insert);
-      for (int i=0; i < ITEM_COUNT/3; i++) {
+      for (int i=0; i < ITEM_COUNT/2; i++) {
         item = nodes.removeAt(random.nextInt(nodes.length)).value;
         redBlackTree.remove(redBlackTree.find(item).second);
       }

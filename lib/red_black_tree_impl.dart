@@ -10,6 +10,10 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
     if (lhs == rhs) return 0;
   };
 
+  /// Keeps track of what nodes are in the tree.  When removing a node, it is 
+  /// useful to know if that node is actually in the tree.
+  final Map<int, bool> _nodeRegistry = <int, Null>{};
+
   Comparator _comparator;
   RedBlackNode<T> _root = RedBlackTree.NULL;
   RedBlackNode<T> _head;
@@ -22,10 +26,8 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
   RedBlackNode<T> get root => _root;
   RedBlackNode<T> get head => _head;
   RedBlackNode<T> get tail => _tail;
-
   
   RedBlackTree<T> copy(RedBlackTree<T> other);
-
 
   NodePair<T> find(T value) {
     RedBlackNode<T> node = root;
@@ -47,7 +49,6 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
     return new NodePair<T>(parent, null);
   }
 
-
   NodePair<T> findInsertionPoint(T value) {
     RedBlackNode<T> node = root;
     RedBlackNode<T> parent = root;
@@ -64,7 +65,6 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
 
     return new NodePair<T>(parent, null); 
   }
-
 
   NodePair<T> insertAfter(RedBlackNode<T> after, RedBlackNode<T> node) {
     RedBlackNode<T> before;
@@ -128,10 +128,10 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
     if (node.next == null) _tail = node;
 
     node.color = Color.RED;
+    _nodeRegistry[node.hashCode] = null;
     _fixupAfterInsertion(node);
     return new NodePair<T>(node.parent, node);
   }
-
 
   NodePair<T> insert(RedBlackNode<T> newNode) {
     NodePair<T> searchResult = findInsertionPoint(newNode.value);
@@ -167,12 +167,17 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
 
     newNode.left = newNode.right = RedBlackTree.NULL;
     newNode.color = Color.RED;
+    _nodeRegistry[newNode.hashCode] = null;
     _fixupAfterInsertion(newNode);
     return new NodePair<T>(newNode.parent, newNode);
   }
 
+  NodePair<T> remove(RedBlackNode<T> node) {
+    if (!_containsNode(node)) {
+      return new NodePair<T>(null, null);
+    }
+    _nodeRegistry.remove(node.hashCode);
 
-  void remove(RedBlackNode<T> node) {
     RedBlackNode<T> child;
     RedBlackNode<T> after = node;
     Color originalColor = after.color;
@@ -196,7 +201,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
       child = node.left;
       _transplant(node, child);
     } else {
-      after = node.next; // inorder successor
+      after = node.next;
       originalColor = after.color;
       child = after.right;
       if (after.parent == node) {
@@ -221,6 +226,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
     if (originalColor == Color.BLACK) {
       _fixupAfterRemove(child);
     }
+    return new NodePair(node, null);
   }
 
   // Fix any violations of the red-black properties caused by node after an 
@@ -392,4 +398,8 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
     }
     replacement.parent = existing.parent;
   }
+
+  // Returns true if [node] is in this tree.
+  bool _containsNode(RedBlackNode<T> node) => 
+    _nodeRegistry.containsKey(node.hashCode);
 }

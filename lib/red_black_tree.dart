@@ -5,23 +5,27 @@ part 'red_black_tree_impl.dart';
 /// Possible tree node colors.
 enum Color { RED, BLACK }
 
-/// Comparator function for instances of T.  
-/// - Returns a value < 0 when [lhs] precedes [rhs].
-/// - Returns a value > 0 when [rhs] precedes [lhs].
-/// - Returns 0 when lhs and rhs are ordered equally.
+/// Comparator function for instances of T.
+/// 
+/// Returns a value < 0 when [lhs] precedes [rhs].
+/// Returns a value > 0 when [rhs] precedes [lhs].
+/// Returns 0 when lhs and rhs are ordered equally.
 typedef int Comparator(T lhs, T rhs);
 
-/// A pair of [RedBlackNode]s. Used as the result of read/write operations on a
-/// [RedBlackTree].
+/// A pair of [RedBlackNode]s. 
+/// 
+/// Used as the result of read/write operations on a [RedBlackTree].
 class NodePair<T> {
   final RedBlackNode<T> first;
   final RedBlackNode<T> second;
   NodePair(this.first, this.second);
 }
 
-/// A Red Black Tree Node.  Each node also represents a chain in a linked list.
-/// Operations that read/write this node from/to a tree automatically set and 
-/// reset node pointers.
+/// A Red Black Tree Node.  
+/// 
+/// Each node also represents a chain in a linked list.  Operations that 
+/// read/write this node from/to a tree automatically set and reset node 
+/// pointers.
 class RedBlackNode<T> {
   Color color;
   T value;
@@ -63,12 +67,14 @@ abstract class RedBlackTree<T> {
   /// Returns the root node in the tree.
   RedBlackNode<T> get root;
 
-  /// Returns the head of the linked list.  When the list only has one element,
-  /// that element is returned.
+  /// Returns the head of the linked list.
+  /// 
+  /// When the list only has one element, that element is returned.
   RedBlackNode<T> get head;
 
-  /// Returns the tail of the linked list.  When the list only has one element,
-  /// that element is returned.
+  /// Returns the tail of the linked list.  
+  /// 
+  /// When the list only has one element, that element is returned.
   RedBlackNode<T> get tail;
 
   /// TODO(kjharland): implement
@@ -104,6 +110,10 @@ abstract class RedBlackTree<T> {
   /// the sorted order of the linked-list.
   NodePair<T> insertAfter(RedBlackNode<T> after, RedBlackNode<T> node);
 
-  /// Removes [node] from the tree.
-  void remove(RedBlacNode<T> node);
+  /// Removes [node] from the tree and returns a NodePair. 
+  ///
+  /// If the node is in the tree, NodePair.first will be the removed node. 
+  /// Otherwise NodePair.first will be null.  NodePair.second will always be 
+  /// null.
+  NodePair<T> remove(RedBlackNode<T> node);
 }
