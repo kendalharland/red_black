@@ -1,3 +1,9 @@
+///
+/// Copyright (c) 2015 Kendal Harland
+///
+/// 
+/// A Red-Black tree implementation that provides a List-like interface.
+
 library red_black_tree;
 
 part 'red_black_tree_impl.dart';

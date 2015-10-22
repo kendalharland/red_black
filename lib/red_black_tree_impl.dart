@@ -1,6 +1,5 @@
 part of red_black_tree;
 
-
 /// RedBlackTree default implementation.
 class _RedBlackTreeImpl<T> implements RedBlackTree {
   /// Default comparator for instances of T.
