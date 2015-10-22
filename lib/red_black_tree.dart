@@ -16,7 +16,7 @@ enum Color { RED, BLACK }
 /// Returns a value < 0 when [lhs] precedes [rhs].
 /// Returns a value > 0 when [rhs] precedes [lhs].
 /// Returns 0 when lhs and rhs are ordered equally.
-typedef int Comparator(T lhs, T rhs);
+typedef int Comparator<T>(T lhs, T rhs);
 
 /// A pair of [RedBlackNode]s. 
 /// 
@@ -67,7 +67,7 @@ abstract class RedBlackTree<T> {
   static final NULL = new RedBlackNode<T>(null)..color = Color.BLACK;
 
   /// Factory constructor to return an instance of the default implementation
-  factory RedBlackTree([Comparator comparator]) => 
+  factory RedBlackTree([Comparator<T> comparator]) => 
     new _RedBlackTreeImpl<T>(comparator);
 
   /// Returns the root node in the tree.

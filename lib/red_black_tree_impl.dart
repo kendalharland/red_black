@@ -13,7 +13,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
   /// useful to know if that node is actually in the tree.
   final Map<int, bool> _nodeRegistry = <int, Null>{};
 
-  Comparator _comparator;
+  Comparator<T> _comparator;
   RedBlackNode<T> _root = RedBlackTree.NULL;
   RedBlackNode<T> _head;
   RedBlackNode<T> _tail;
