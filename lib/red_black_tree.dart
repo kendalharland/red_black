@@ -84,15 +84,8 @@ abstract class RedBlackTree<T> {
   /// When the list only has one element, that element is returned.
   RedBlackNode<T> get tail;
 
-  /// TODO(kjharland): implement
-  /// 
   /// Returns true if the tree contains [value].
   bool contains(T value);
-
-  /// TODO(kjharland): implement
-  /// 
-  /// Returns a deep copy of [other].
-  RedBlackNode<T> clone(RedBlackTree<T> other);
 
   /// Finds and returns the node containing [value], if it exists.  
   /// 
