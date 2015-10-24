@@ -56,9 +56,10 @@ class RedBlackNode<T> {
 
 /// A Linked-List Red-Black tree implementation.  
 /// 
-/// Insert and delete operations automatically update an item's position in the 
-/// linked list, resetting next and prev pointers accordingly. When ordering 
-/// items in the tree, the item's < > and == operators are used.
+/// Insert and delete operations automatically update a node's position in the 
+/// linked list, resetting next and prev pointers accordingly. 
+/// 
+/// When ordering items in the tree, the item's < > and == operators are used.
 /// 
 /// Because this is a red-black tree, it is not guaranteed to be completely 
 /// balanced after write operations. 
@@ -70,33 +71,39 @@ abstract class RedBlackTree<T> {
   factory RedBlackTree([Comparator<T> comparator]) => 
     new _RedBlackTreeImpl<T>(comparator);
 
-  /// Returns the root node in the tree.
+  /// The root node of the tree.
   RedBlackNode<T> get root;
 
-  /// Returns the head of the linked list.
+  /// The head of the linked list.
   /// 
   /// When the list only has one element, that element is returned.
   RedBlackNode<T> get head;
 
-  /// Returns the tail of the linked list.  
+  /// The tail of the linked list.  
   /// 
   /// When the list only has one element, that element is returned.
   RedBlackNode<T> get tail;
 
   /// TODO(kjharland): implement
   /// 
-  /// Returns a deep copy of [other].  [other]'s [comparator] is also copied.
+  /// Returns true if the tree contains [value].
+  bool contains(T value);
+
+  /// TODO(kjharland): implement
+  /// 
+  /// Returns a deep copy of [other].
   RedBlackNode<T> clone(RedBlackTree<T> other);
 
-  /// Finds and returns the node containing [value] if it exists. Otherwise
-  /// returns null.
+  /// Finds and returns the node containing [value], if it exists.  
+  /// 
+  /// If [value] is not found in the tree, the returned NodePair's first and 
+  /// second properties will be null.
   NodePair<T> find(T value);
 
-  /// Returns a NodePair representing a location for [value] to be inserted into
-  /// the tree as a leaf. 
+  /// Finds the location where [value] would be inserted into the tree.
   /// 
-  /// NodePair.first will contain the would-be parent of [value]'s node if it 
-  /// were inserted into the tree. NodePair.second will be null.
+  /// The first node of the returned [NodePair] will contain the would-be parent 
+  /// of node of [value]'s node.  The second will be null.
   NodePair<T> findInsertionPoint(T value);
 
   /// Inserts [node] into the tree as a leaf.
@@ -106,8 +113,10 @@ abstract class RedBlackTree<T> {
   /// is greater than or equal to its value.
   NodePair<T> insert(RedBlackNode<T> node);
 
-  /// Inserts [node] after [after] and returns a [NodePair] where first = the
-  /// parent of [node] and second = [node].  
+  /// Inserts [node] after [after].
+  /// 
+  /// The first node of the returned NodePair will be the parent of [node] and
+  /// the second will be [node].
   /// 
   /// If [after] is null or [head] then [node] will become the new head of the 
   /// list. If [after] is [tail], [node] will become the new tail of the list.
@@ -116,10 +125,10 @@ abstract class RedBlackTree<T> {
   /// the sorted order of the linked-list.
   NodePair<T> insertAfter(RedBlackNode<T> after, RedBlackNode<T> node);
 
-  /// Removes [node] from the tree and returns a NodePair. 
+  /// Removes [node] from the tree.
   ///
-  /// If the node is in the tree, NodePair.first will be the removed node. 
-  /// Otherwise NodePair.first will be null.  NodePair.second will always be 
-  /// null.
+  /// If the node is in the tree, the first node of the returned NodePair will 
+  /// be the removed node. Otherwise first will be null.  The second will always
+  /// be null.
   NodePair<T> remove(RedBlackNode<T> node);
 }
