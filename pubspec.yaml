@@ -1,5 +1,5 @@
 name: red_black_tree
-version: 0.1.6
+version: 0.1.7
 authors: 
 - Kendal Harland <kendaljharland@gmail.com>
 description: A Linked-List backed by a Red-Black Tree
