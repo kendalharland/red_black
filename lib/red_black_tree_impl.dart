@@ -1,7 +1,7 @@
 part of red_black_tree;
 
 /// RedBlackTree default implementation.
-class _RedBlackTreeImpl<T> implements RedBlackTree {
+class RedBlackTreeImpl<T> implements RedBlackTree {
   /// Default comparator for instances of T.
   static final _DEFAULT_COMPARATOR = (T lhs, T rhs) {
     if (lhs < rhs) return -1;
@@ -18,7 +18,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
   RedBlackNode<T> _head;
   RedBlackNode<T> _tail;
 
-  _RedBlackTreeImpl(this._comparator) { 
+  RedBlackTreeImpl(this._comparator) { 
     _comparator ??= _DEFAULT_COMPARATOR;
   }
 
@@ -26,7 +26,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
   RedBlackNode<T> get head => _head;
   RedBlackNode<T> get tail => _tail;
   
-  RedBlackTree<T> copy(RedBlackTree<T> other);
+  Comparator<T> get comparator => _comparator;
 
   bool contains(T value) => find(value).first != null;
 
@@ -35,7 +35,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
 
     //TODO(kharland): This could probably simpler
     while (node != RedBlackTree.NULL) {
-      int result = _comparator(value, node.value);
+      int result = comparator(value, node.value);
       if (result < 0) {
         node = node.left;
       } else if (result > 0) {
@@ -54,7 +54,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
 
     while (node != RedBlackTree.NULL) {
       parent = node;
-      int result = _comparator(value, node.value);
+      int result = comparator(value, node.value);
       if (result < 0) {
         node = node.left;
       } else {

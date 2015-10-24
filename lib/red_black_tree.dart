@@ -67,7 +67,10 @@ abstract class RedBlackTree<T> {
 
   /// Factory constructor to return an instance of the default implementation
   factory RedBlackTree([Comparator<T> comparator]) => 
-    new _RedBlackTreeImpl<T>(comparator);
+    new RedBlackTreeImpl<T>(comparator);
+
+  /// The comparator function for this tree.
+  Comparator<T> get comparator;
 
   /// The root node of the tree.
   RedBlackNode<T> get root;
