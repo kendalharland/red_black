@@ -28,13 +28,13 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
   
   RedBlackTree<T> copy(RedBlackTree<T> other);
 
+  bool contains(T value) => find(value).first != null;
+
   NodePair<T> find(T value) {
     RedBlackNode<T> node = root;
-    RedBlackNode<T> parent = node;
 
     //TODO(kharland): This could probably simpler
     while (node != RedBlackTree.NULL) {
-      parent = node;
       int result = _comparator(value, node.value);
       if (result < 0) {
         node = node.left;
@@ -45,7 +45,7 @@ class _RedBlackTreeImpl<T> implements RedBlackTree {
       }
     }
 
-    return new NodePair<T>(parent, null);
+    return new NodePair<T>(null, null);
   }
 
   NodePair<T> findInsertionPoint(T value) {

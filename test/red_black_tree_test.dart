@@ -46,8 +46,8 @@ void redBlackTreeTest() {
     });
 
     test(
-        "find should return a NodePair where first = the parent of the node "
-        "containing the search key and second = the node itself, if the node "
+        "find should return a NodePair where first is the parent of the node "
+        "containing the search key and second is the node itself, if the node "
         "exists", () {
       RedBlackNode<int> node;
       NodePair<int> pair;
@@ -63,20 +63,20 @@ void redBlackTreeTest() {
     });
 
     test(
-        "find should return a NodePair where first = the last node visited and "
-        "second = null if the given value is not in the tree", () {
+        "find should return a NodePair where first and second are null if the "
+        "given value is not in the tree", () {
       RedBlackNode<int> node;
       NodePair<int> pair;
 
       nodes.forEach(redBlackTree.insert);
       pair = redBlackTree.find(MAX_VALUE + 1);
-      expect(pair.first, new isInstanceOf<RedBlackNode>());
+      expect(pair.first, isNull);
       expect(pair.second, isNull);
     });
 
     test(
-        "findInsertionPoint should return a NodePair where first = a node with "
-        "at most one child and second = null", () {
+        "findInsertionPoint should return a NodePair where first is a node with"
+        " at most one child and second is null", () {
       int item;
       nodes.forEach(redBlackTree.insert);
 
@@ -91,6 +91,17 @@ void redBlackTreeTest() {
       }
     });
 
+    test(
+        "contains should return true when the given value is in the tree and "
+        "false otherwise", () {
+      int valueInTree = nodes[random.nextInt(nodes.length)].value;
+      int valueNotInTree = MAX_VALUE + 1;
+
+      nodes.forEach(redBlackTree.insert);
+      expect(redBlackTree.contains(valueInTree), isTrue);
+      expect(redBlackTree.contains(valueNotInTree), isFalse);
+    });
+
     test("insert should preserve ascending order of linked-list pointers", () {
       RedBlackNode<int> node = redBlackTree.head.next;
 
@@ -102,8 +113,8 @@ void redBlackTreeTest() {
     });
 
     test(
-      "remove should return a NodePair where first = the removed node and "
-      "second = null if the node is in the tree.", () {
+      "remove should return a NodePair where first is the removed node and "
+      "second is null if the node is in the tree.", () {
         NodePair<int> pair;
         RedBlackNode<int> node;
 
@@ -117,7 +128,7 @@ void redBlackTreeTest() {
     });
 
     test(
-      "remove should return a NodePair where first and second = null if the "
+      "remove should return a NodePair where first and second is null if the "
       "node is not in the tree.", () {
         NodePair<int> pair;
         RedBlackNode<int> node;
