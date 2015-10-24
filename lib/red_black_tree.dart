@@ -13,9 +13,9 @@ enum Color { RED, BLACK }
 
 /// Comparator function for instances of T.
 /// 
-/// Returns a value < 0 when [lhs] precedes [rhs].
-/// Returns a value > 0 when [rhs] precedes [lhs].
-/// Returns 0 when lhs and rhs are ordered equally.
+/// A Comparator returns an int less than 0 when [lhs] precedes [rhs], an int 
+/// greater than 0 when [rhs] precedes [lhs] and 0 when lhs and rhs are ordered
+/// equally.
 typedef int Comparator<T>(T lhs, T rhs);
 
 /// A pair of [RedBlackNode]s. 
@@ -29,9 +29,7 @@ class NodePair<T> {
 
 /// A Red Black Tree Node.  
 /// 
-/// Each node also represents a chain in a linked list.  Operations that 
-/// read/write this node from/to a tree automatically set and reset node 
-/// pointers.
+/// Each node also represents a chain in a linked list.
 class RedBlackNode<T> {
   Color color;
   T value;
