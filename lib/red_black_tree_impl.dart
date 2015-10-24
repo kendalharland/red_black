@@ -142,7 +142,7 @@ class RedBlackTreeImpl<T> implements RedBlackTree {
     if (parent == RedBlackTree.NULL) {
       _root = newNode;
       _head = _tail = _root;
-    } else if (newNode.value < parent.value) {
+    } else if (comparator(newNode.value, parent.value) < 0) {
       parent.left = newNode;
       newNode.prev = parent.prev;
       if(newNode.prev == null) {
