@@ -1,5 +1,7 @@
 library red_black.list;
 
+// TODO(kharland): Replace comment references to 'tree' with 'list'.
+
 /// An [Iterator] implementation that iterates over the elements of a
 /// [RedBlackList].
 class RedBlackListIterator<T> implements Iterator<T> {
