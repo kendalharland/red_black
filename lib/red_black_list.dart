@@ -73,7 +73,7 @@ abstract class RedBlackList implements List<T> {
   bool contains(T value);
 }
 
-/// An [RedBlackList] implementation that delegates to a [RedBlackTree].
+/// Default [RedBlackList] implementation.
 class _RedBlackListImpl<T> implements RedBlackList<T> {
   final RedBlackTree<T> _tree;
   final bool _growable;
