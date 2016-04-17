@@ -75,23 +75,23 @@ abstract class RedBlackList implements List<T> {
 
 /// An [RedBlackList] implementation that delegates to a [RedBlackTree].
 class _RedBlackListImpl<T> implements RedBlackList<T> {
-  final RedBlackTree<T> _delegate;
+  final RedBlackTree<T> _tree;
   final bool _growable;
 
-  _RedBlackListImpl(this._delegate, {bool growable: true})
+  _RedBlackListImpl(this._tree, {bool growable: true})
       : _growable = growable;
 
-  T get first => isNotEmpty ? _delegate.head.value : null;
+  T get first => isNotEmpty ? _tree.head.value : null;
 
   T get last => isNotEmpty ? _delgate.tail.value : null;
 
-  bool get isEmpty => _delegate.size == 0;
+  bool get isEmpty => _tree.size == 0;
 
   bool get isNotEmpty => !isEmpty;
 
   Iterator<T> get iterator => new RedBlackListIterator(this);
 
-  int get length => _delegate.size;
+  int get length => _tree.size;
 
   set length(int value) {
     if (!_growable) {
@@ -107,5 +107,5 @@ class _RedBlackListImpl<T> implements RedBlackList<T> {
     return first;
   }
 
-  bool contains(T value) => _delegate.find(value).second != null;
+  bool contains(T value) => _tree.find(value).second != null;
 }
