@@ -5,17 +5,14 @@
 /// A Red-Black tree implementation that provides a List-like interface.
 library red_black.tree;
 
+import 'package:red_black/binary_tree.dart';
+import 'package:red_black/pair.dart';
+export 'package:red_black/pair.dart';
+
 enum Color { RED, BLACK }
 
-// TODO(kharland): move this to another package
-class Pair<T> {
-  final T first;
-  final T second;
-  Pair(this.first, this.second);
-}
-
 /// A Red Black Tree Node.
-class RedBlackNode<T> {
+class RedBlackNode<T> implements BinaryTreeNode<T> {
   Color color;
   T value;
 
@@ -37,6 +34,7 @@ class RedBlackNode<T> {
   RedBlackNode(this.value);
 }
 
+
 /// A Linked-List Red-Black tree implementation.
 ///
 /// Insert and delete operations automatically update a node's position in the
@@ -44,14 +42,20 @@ class RedBlackNode<T> {
 ///
 /// Because this is a red-black tree, it is not guaranteed to be completely
 /// balanced after write operations.
-abstract class RedBlackTree<T> implements Iterable<T> {
+abstract class RedBlackTree<T> implements BinaryTree<T> {
   factory RedBlackTree() => new _RedBlackTreeImpl<T>();
 
-  RedBlackTreeIterator<T> get inorderIterator;
+  /// Returns a new [BinaryTreeIterator] that iterates over the nodes in the
+  /// tree using an inorder traversal.
+  BinaryTreeIterator<T> get inorderIterator;
 
-  RedBlackTreeIterator<T> get preorderIterator;
+  /// Returns a new [BinaryTreeIterator] that iterates over the nodes in the
+  /// tree using a preorder traversal.
+  BinaryTreeIterator<T> get preorderIterator;
 
-  RedBlackTreeIterator<T> get postorderIterator;
+  /// Returns a new [BinaryTreeIterator] that iterates over the nodes in the
+  /// tree using a postorder traversal.
+  BinaryTreeIterator<T> get postorderIterator;
 
   /// The root node of the tree.
   RedBlackNode<T> get root;
@@ -113,7 +117,7 @@ abstract class RedBlackTree<T> implements Iterable<T> {
   Pair<RedBlackNode<T>> removeNode(RedBlackNode<T> node);
 }
 
-/// RedBlackTree default implementation.
+/// Default implementation of a [RedBlackTree].
 class _RedBlackTreeImpl<T> implements RedBlackTree<T> {
   static int _DEFAULT_COMPARATOR(T lhs, T rhs) {
     if (lhs < rhs) return -1;
@@ -125,12 +129,20 @@ class _RedBlackTreeImpl<T> implements RedBlackTree<T> {
   static final _NULL = new RedBlackNode<T>(null)..color = Color.BLACK;
 
   /// Keeps track of what nodes are in the tree.
-  final Map<int, bool> _nodeRegistry = <int, Null>{};
+  final _nodeRegistry = <int, Null>{};
   RedBlackNode<T> _root = _NULL;
   RedBlackNode<T> _head;
   RedBlackNode<T> _tail;
-
   Comparator<T> comparator = _DEFAULT_COMPARATOR;
+
+  BinaryTreeIterator<T> get inorderIterator =>
+    new BinaryTreeIterator<T>(this, new InorderTraversalStrategy());
+
+  BinaryTreeIterator<T> get preorderIterator =>
+    new BinaryTreeIterator<T>(this, new PreorderTraversalStrategy());
+
+  BinaryTreeIterator<T> get postorderIterator =>
+    new BinaryTreeIterator<T>(this, new PostorderTraversalStrategy());
 
   RedBlackNode<T> get root => _root;
 

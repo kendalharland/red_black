@@ -1,5 +1,7 @@
 library red_black.list;
 
+import 'package:red_black/red_black_tree.dart';
+
 /// An [Iterator] implementation that iterates over the elements of a
 /// [RedBlackList].
 class RedBlackListIterator<T> implements Iterator<T> {
@@ -8,12 +10,7 @@ class RedBlackListIterator<T> implements Iterator<T> {
 
   RedBlackListIterator(this._list);
 
-  T get current {
-    if (_index < 0 || _index >= _list.length) {
-      return null;
-    }
-    return _list[_index];
-  }
+  T get current => _index < 0 || _index >= _list.length ? null : _list[_index];
 
   bool moveNext() {
     if (_index < _list.length) {
@@ -40,22 +37,22 @@ abstract class RedBlackList implements List<T> {
     return new _RedBlackListImpl<T>(delegateTree);
   }
 
-  /// The first inorder element in the tree or null if the tree is empty.
+  /// The first inorder element in the list or null if the list is empty.
   T get first;
 
-  /// The last indorder element in the tree[M`Â or null if the tree is empty.
+  /// The last indorder element in the list or null if the list is empty.
   T get last;
 
-  /// Returns true if there are no elements in the tree.
+  /// Returns true if there are no elements in the list.
   bool get isEmpty;
 
-  /// Returns true if there is at least one element in the tree.
+  /// Returns true if there is at least one element in the list.
   bool get isNotEmpty;
 
-  /// Returns a new [Iterator] that allows iterating the nodes of the tree.
+  /// Returns a new [Iterator] that allows iterating the nodes of the list.
   Iterator<T> get iterator;
 
-  /// The number of elements in the tree
+  /// The number of elements in the list
   int get length;
 
   /// Changes the length of this list.
