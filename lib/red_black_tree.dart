@@ -34,7 +34,6 @@ class RedBlackNode<T> implements BinaryTreeNode<T> {
   RedBlackNode(this.value);
 }
 
-
 /// A Linked-List Red-Black tree implementation.
 ///
 /// Insert and delete operations automatically update a node's position in the
@@ -136,13 +135,13 @@ class _RedBlackTreeImpl<T> implements RedBlackTree<T> {
   Comparator<T> comparator = _DEFAULT_COMPARATOR;
 
   BinaryTreeIterator<T> get inorderIterator =>
-    new BinaryTreeIterator<T>(this, new InorderTraversalStrategy());
+      new BinaryTreeIterator<T>(this, new InorderTraversalStrategy());
 
   BinaryTreeIterator<T> get preorderIterator =>
-    new BinaryTreeIterator<T>(this, new PreorderTraversalStrategy());
+      new BinaryTreeIterator<T>(this, new PreorderTraversalStrategy());
 
   BinaryTreeIterator<T> get postorderIterator =>
-    new BinaryTreeIterator<T>(this, new PostorderTraversalStrategy());
+      new BinaryTreeIterator<T>(this, new PostorderTraversalStrategy());
 
   RedBlackNode<T> get root => _root;
 

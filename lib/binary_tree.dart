@@ -12,7 +12,7 @@ abstract class BinaryTree<T> {}
 abstract class BinaryTreeNode<T> {}
 
 /// Defines a strategy for traversing a [BinaryTree].
-abstract class BinaryTreeTraversal<T>{
+abstract class BinaryTreeTraversal<T> {
   /// Returns the successor to [node] in this traversal.
   BinaryTreeNode<T> next(BinaryTreeNode<T> node);
 }
@@ -33,10 +33,10 @@ class BinaryTreeIterator<T> implements Iterator<BinaryTreeNode<T>> {
     return _currentNode != null;
   }
 
-  BinaryTreeNode<T> current => _currentNode;
+  BinaryTreeNode<T> get current => _currentNode;
 }
 
-/// A [BinaryTreeTraversal] that computes the inorder successor of a 
+/// A [BinaryTreeTraversal] that computes the inorder successor of a
 /// [BinaryTreeNode].
 class InorderTraversalStrategy<T> implements BinaryTreeTraversal<T> {
   final _visited = <BinaryTreeNode<T>, Null>{};
@@ -61,4 +61,3 @@ class InorderTraversalStrategy<T> implements BinaryTreeTraversal<T> {
     }
   }
 }
-
