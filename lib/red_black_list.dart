@@ -89,8 +89,7 @@ class _RedBlackListImpl<T> implements RedBlackList<T> {
 
   bool get isNotEmpty => !isEmpty;
 
-  Iterator<T> get iterator =>
-      new RedBlackListIterator(_delegate.inorderIterator);
+  Iterator<T> get iterator => new RedBlackListIterator(this);
 
   int get length => _delegate.size;
 
