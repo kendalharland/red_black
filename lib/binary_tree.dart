@@ -24,8 +24,7 @@ class BinaryTreeIterator<T> implements Iterator<BinaryTreeNode<T>> {
   BinaryTreeNode<T> _currentNode;
 
   BinaryTreeIterator(BinaryTree<T> tree, this._traversalStrategy) {
-    _currentNode = _tree.root;
-    _currentNode = _traversalStrategy.next(_currentNode);
+    _currentNode = _traversalStrategy.next(_tree.root);
   }
 
   bool moveNext() {
