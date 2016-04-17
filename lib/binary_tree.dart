@@ -13,7 +13,8 @@ abstract class BinaryTreeNode<T> {}
 
 /// Defines a strategy for traversing a [BinaryTree].
 abstract class BinaryTreeTraversal<T> {
-  /// Returns the successor to [node] in this traversal.
+  /// Returns the successor to [node] in this traversal or null if
+  /// no such node exists.
   BinaryTreeNode<T> next(BinaryTreeNode<T> node);
 }
 
