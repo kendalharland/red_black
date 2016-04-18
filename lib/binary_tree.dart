@@ -48,16 +48,31 @@ class InorderTraversalStrategy<T> implements BinaryTreeTraversal<T> {
     return node;
   }
 
+  // TODO(kharland): this won't work on trees that use sentinel values for
+  // "null" nodes because `node == null` will never return true.
   BinaryTreeNode<T> next(BinaryTreeNode<T> node) {
+    var next;
     if (node.left != null && !_visited.containsKey(node.left)) {
-      return _leftmostChild(node.left);
+      next = _leftmostChild(node.left);
     } else if (!_visited.containsKey(node)) {
-      _visited[node] = null;
-      return node;
+      next = node;
     } else if (node.right != null && !_visited.containsKey(node.right)) {
-      return _leftmostChild(node.right);
+      next = _leftmostChild(node.right);
     } else {
-      return node.parent;
+      // Right child and leaf node - successor is first ancestor whose left
+      // subtree contains [node].
+      var parent = node.parent;
+      var grandparent = parent.parent;
+      while (parent != null && grandparent != null && parent != grandparent.left) {
+        parent = grandparent;
+        grandparent = parent.parent;
+      } 
+      next = parent;
     }
+
+    if (next != null) {
+     _visited[next] = null;
+    }
+    return next;
   }
 }
