@@ -50,7 +50,7 @@ void redBlackTreeTest() {
         "containing the search key and second is the node itself, if the node "
         "exists", () {
       RedBlackNode<int> node;
-      Pair<int> pair;
+      var pair;
       int value;
 
       nodes.forEach(tree.insertNode);
@@ -66,7 +66,7 @@ void redBlackTreeTest() {
         "find should return a Pair where first and second are null if the "
         "given value is not in the tree", () {
       RedBlackNode<int> node;
-      Pair<int> pair;
+      var pair;
 
       nodes.forEach(tree.insertNode);
       pair = tree.find(MAX_VALUE + 1);
@@ -82,7 +82,7 @@ void redBlackTreeTest() {
 
       for (int i = 0; i < ITEM_COUNT / 2; i++) {
         item = nodes[random.nextInt(nodes.length)].value;
-        Pair<int> pair = tree.findInsertionPoint(item);
+        var pair = tree.findInsertionPoint(item);
         if (!tree.isNullNode(pair.first.left)) {
           expect(tree.isNullNode(pair.first.right), isTrue);
         } else if (!tree.isNullNode(pair.first.right)) {

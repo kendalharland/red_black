@@ -121,7 +121,7 @@ abstract class RedBlackTree<T> implements BinaryTree<T> {
 
 /// Default implementation of a [RedBlackTree].
 class _RedBlackTreeImpl<T> implements RedBlackTree<T> {
-  static int _DEFAULT_COMPARATOR(T lhs, T rhs) {
+  static int _DEFAULT_COMPARATOR(lhs, rhs) {
     if (lhs < rhs) return -1;
     if (lhs > rhs) return 1;
     if (lhs == rhs) return 0;
