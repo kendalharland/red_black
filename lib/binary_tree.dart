@@ -1,8 +1,5 @@
 library red_black.binary_tree;
 
-import 'package:red_black/binary_tree_iterator';
-export 'package:red_black/binary_tree_iterator';
-
 // TODO(kjharland): move this to another package
 
 /// Interface for a binary tree.
