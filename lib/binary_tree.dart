@@ -60,15 +60,16 @@ class InorderTraversalStrategy<T> implements BinaryTreeTraversal<T> {
       // subtree contains [node].
       var parent = node.parent;
       var grandparent = parent.parent;
-      while (parent != null && grandparent != null && parent != grandparent.left) {
+      while (
+          parent != null && grandparent != null && parent != grandparent.left) {
         parent = grandparent;
         grandparent = parent.parent;
-      } 
+      }
       next = parent;
     }
 
     if (next != null) {
-     _visited[next] = null;
+      _visited[next] = null;
     }
     return next;
   }

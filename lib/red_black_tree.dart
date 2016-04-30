@@ -114,9 +114,9 @@ abstract class RedBlackTree<T> implements BinaryTree<T> {
   /// be the removed node. Otherwise first will be null.  The second will always
   /// be null.
   Pair<RedBlackNode<T>> removeNode(RedBlackNode<T> node);
-  
+
   /// Returns true if [node] if is a null-node.
-  bool isNullNode(RedBlackNode<T> node); 
+  bool isNullNode(RedBlackNode<T> node);
 }
 
 /// Default implementation of a [RedBlackTree].
@@ -151,7 +151,6 @@ class _RedBlackTreeImpl<T> implements RedBlackTree<T> {
   RedBlackNode<T> get head => _head;
 
   RedBlackNode<T> get tail => _tail;
-
 
   @override
   Pair<RedBlackNode<T>> find(T value) {

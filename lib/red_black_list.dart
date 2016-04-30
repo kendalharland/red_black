@@ -75,8 +75,7 @@ class _RedBlackListImpl<T> implements RedBlackList<T> {
   final RedBlackTree<T> _tree;
   final bool _growable;
 
-  _RedBlackListImpl(this._tree, {bool growable: true})
-      : _growable = growable;
+  _RedBlackListImpl(this._tree, {bool growable: true}) : _growable = growable;
 
   T get first => isNotEmpty ? _tree.head.value : null;
 
